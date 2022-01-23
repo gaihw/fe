@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div id="demo">
+        <h1>XMLHttpRequest 对象</h1>
+        <button>修改内容</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                url:'http://localhost:8080/api/user',
+                contentType: "application/json; charset=utf-8",
+                dataType:'json',
+                type:'get',
+                success:function (result) {
+                    console.log(result)
+                    document.getElementById("demo").innerHTML = result.message;
+                }
+            })
+            });
+        });
+    </script>
+
+</body>
+
+</html>
