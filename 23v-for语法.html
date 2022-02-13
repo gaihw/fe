@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="./lib/vue.js"></script>
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <ol>
+            <li v-for="site in sites">
+                {{ site.name }}
+            </li>
+            <li>--------------</li>
+        </ol>
+
+        <hr>
+        <!-- v-for 可以通过一个对象的属性来迭代数据： -->
+        <ul>
+            <li v-for="value in object">
+                {{ value }}
+            </li>
+        </ul>
+
+        <hr>
+        <!-- 提供第二个的参数为键名： -->
+        <ul>
+            <li v-for="(value, key) in object">
+                {{ key }} : {{ value }}
+            </li>
+        </ul>
+        <hr>
+        <!-- 第三个参数为索引： -->
+        <ul>
+            <li v-for="(value, key, index) in object">
+                {{ index }}. {{ key }} : {{ value }}
+            </li>
+        </ul>
+
+        <hr>
+        <!-- v-for 也可以循环整数 -->
+        <ul>
+            <li v-for="n in 10">
+                {{ n }}
+            </li>
+        </ul>
+
+        <hr>
+        <table class="table table-bordered table-hover table-striped">
+            <tr>
+                <th v-for='(item,ind) in columnList' :key="ind">{{item}}</th> 
+            </tr>
+            <tr v-for='(item,index) in inforList' :key="index">
+                <td v-for='(it,ind) in columnList' :key="ind">{{item[it]}}</td> 
+            </tr>
+       </table>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                sites: [
+                    { name: 'Runoob' },
+                    { name: 'Google' },
+                    { name: 'Taobao' }
+                ],
+                object: {
+                    name: '菜鸟教程',
+                    url: 'http://www.runoob.com',
+                    slogan: '学的不仅是技术，更是梦想！'
+                },
+                columnList: ['userId', 'userName', 'userTel', 'userEmail', 'userMessage', 'inTime'],
+                inforList: [
+                    {'userId': '1', 'userName': '大华', 'userTel': '12345678', 'userEmail': null, 'userMessage': '哈哈'},
+                    {'userId': '2', 'userName': '大华', 'userTel': '12345678', 'userEmail': null, 'userMessage': '哈哈'},
+                    {'userId': '3', 'userName': '大华', 'userTel': '12345678', 'userEmail': null, 'userMessage': '哈哈'}
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

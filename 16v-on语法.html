@@ -11,17 +11,24 @@
     <div id="app">
         <p>{{ message }}</p>
         <button v-on:click="reverseMessage">反转字符串</button>
+        <button @click="reverseMessage">反转字符串</button>
+        <hr>
+        <input type="text" @keyup.enter="onEnter" v-model="secondCount" placeholder="输入数值按回车加到得分上">
     </div>
 
     <script>
         new Vue({
             el: '#app',
             data: {
-                message: 'Runoob!'
+                message: 'Runoob!',
+                secondCount: 11
             },
             methods: {
-                reverseMessage: function () {
+                reverseMessage() {
                     this.message = this.message.split('').reverse().join('')
+                },
+                onEnter(){
+                    console.log("onEnter")
                 }
             }
         })
