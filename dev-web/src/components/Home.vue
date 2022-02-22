@@ -1,0 +1,9 @@
+<template>  
+    <div>
+    欢迎界面
+    </div>  
+</template>
+<script>
+</script>
+<style>
+</style>
