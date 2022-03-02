@@ -10,6 +10,9 @@ import Auto from '../components/auto/Auto'
 import Tool from '../components/tool/Tool'
 import Account from '../components/tool/account/Account'
 import Report from '../components/auto/Report'
+import Check from '../components/tool/check/Check'
+import UserCheck from '../components/tool/check/UserCheck'
+import Balance from '../components/tool/check/Balance'
 
 Vue.use(Router)
 
@@ -76,6 +79,24 @@ export default new Router({
             path: '/test/tool/account/deposit',
             name: '充值',
             component: Deposit
+          }
+        ]
+      },
+      {
+        name: '对账',
+        path: '/test/tool/check',
+        component: Check,
+        redirect: '/test/tool/check/balance',
+        children: [
+          {
+            path: '/test/tool/check/balance',
+            name: '账单同步',
+            component: Balance
+          },
+          {
+            path: '/test/tool/check/userCheck',
+            name: '单用户',
+            component: UserCheck
           }
         ]
       }]

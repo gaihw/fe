@@ -40,7 +40,7 @@
               <i class="el-icon-s-home"></i>
               <span slot="title">首页</span>
             </el-menu-item>
-            <el-submenu index="2">
+            <el-submenu index="2" disabled>
               <template slot="title"
                 ><i class="el-icon-s-operation"></i>接口自动化</template
               >
@@ -60,7 +60,8 @@
               </el-submenu>
               <el-submenu index="3-2">
                 <template slot="title">对账</template>
-                <el-menu-item index="/test/tool/account/deposit1">单用户</el-menu-item>
+                <el-menu-item index="/test/tool/check/balance">余额同步</el-menu-item>
+                <el-menu-item index="/test/tool/check/userCheck">单用户</el-menu-item>
               </el-submenu>
             </el-submenu>
           </el-menu>
@@ -207,7 +208,8 @@ body > .el-container {
 }
 .box-card {
   width: 100%;
-  height: 94%;
+  height: 650px;
+  overflow-y: auto;
 }
 // .router-link-active {
   // text-decoration: none;
