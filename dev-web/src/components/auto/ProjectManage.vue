@@ -41,7 +41,9 @@
     </el-header>
     <el-main>
       <div>
-        <el-table :data="tableData" style="width: 100%" max-height="440">
+        <el-table :data="tableData" style="width: 100%" max-height="440" 
+        :header-cell-style="{textAlign: 'center'}"
+        :cell-style="{ textAlign: 'center' }">>
           <el-table-column type="index" label="序号" width="100">
           </el-table-column>
           <el-table-column prop="platform" label="平台" width="150">

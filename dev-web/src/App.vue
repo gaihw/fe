@@ -11,7 +11,7 @@
       >
         <el-row>
           <el-col :span="2"
-            ><div class="grid-content">测试管理平台</div></el-col
+            ><div class="grid-content">测试平台</div></el-col
           >
           <el-col :span="22"
             ><div class="grid-content">
@@ -56,13 +56,17 @@
               >
               <el-submenu index="3-1">
                 <template slot="title">账户</template>
+                <el-menu-item index="/test/tool/account/info">用户信息</el-menu-item>
                 <el-menu-item index="/test/tool/account/deposit">充值</el-menu-item>
+                <el-menu-item index="/test/tool/account/partner">合伙人</el-menu-item>
               </el-submenu>
               <el-submenu index="3-2">
                 <template slot="title">对账</template>
                 <el-menu-item index="/test/tool/check/balance">余额同步</el-menu-item>
                 <el-menu-item index="/test/tool/check/userCheck">单用户</el-menu-item>
+                <el-menu-item index="/test/tool/check/throughPositions">爆仓计算</el-menu-item>
               </el-submenu>
+              <el-menu-item index="/test/tool/smsCode">短信验证码</el-menu-item>
             </el-submenu>
           </el-menu>
         </el-aside>
@@ -208,7 +212,7 @@ body > .el-container {
 }
 .box-card {
   width: 100%;
-  height: 650px;
+  height: 96%;
   overflow-y: auto;
 }
 // .router-link-active {

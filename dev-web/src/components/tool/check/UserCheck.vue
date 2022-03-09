@@ -19,6 +19,10 @@
         <el-form-item>
           <el-button type="primary" @click="onSubmit">对账</el-button>
         </el-form-item>
+        <el-divider direction="vertical"></el-divider>
+        <el-form-item>
+          <el-button type="primary" @click="allUserCheck">平台对账</el-button>
+        </el-form-item>
       </el-form>
       <el-row>
       <el-col :span="24"><div class="grid-content">1</div></el-col>
@@ -26,7 +30,11 @@
     </el-header>
     <el-main >
       对账结果:
-      <div v-loading="loading" v-html="checkData"></div>
+      <div class="loading-div"
+      :style="{height:windowHeight/2 + 'px'}" 
+      v-loading="loading" 
+      element-loading-text="加载中..." 
+      v-html="checkData"></div>
     </el-main>
   </el-container>
 </template>
@@ -41,7 +49,8 @@ export default {
       report: "无",
       value: '',
       checkData: '',
-      loading:false
+      loading:false,
+      windowHeight: document.documentElement.clientHeight, // 实时屏幕高度
     };
   },
   mounted(){
@@ -49,6 +58,7 @@ export default {
   },
   methods: {
     onSubmit() {
+      this.checkData = '<div>'+this.report+'</div>'
       this.loading=true;
       this.$http({
         method: "get",
@@ -57,11 +67,25 @@ export default {
           "http://localhost:10090/api/tool/check/userCheck?userId=" +
           this.formInline.user+"&time="+this.value,
       }).then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         this.checkData = result.data;
         this.loading=false;
       });
     },
+    allUserCheck(){
+      this.checkData = '<div>'+this.report+'</div>'
+      this.loading=true;
+      this.$http({
+        method: "get",
+        headers: { "Access-Control-Allow-Origin": "*" },
+        url:
+          "http://localhost:10090/api/tool/check/allUserCheck" ,
+      }).then((result) => {
+        // console.log(result.data);
+        this.checkData = result.data;
+        this.loading=false;
+      });
+    }
   },
 };
 </script>
@@ -79,6 +103,7 @@ export default {
   top: 240px;
   bottom: 20px;
   overflow-y: scroll;
+  overflow-x: scroll;
 }
 .grid-content {
     background: #eff1f5;
@@ -86,4 +111,12 @@ export default {
     min-height: 5px;
     color: #eff1f5;
   }
+.loading-div {
+  width: 90%;
+  position: absolute;
+}
+.el-divider--vertical{
+  height: 2.5em;
+  width: 0.3em;
+}
 </style>

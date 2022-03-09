@@ -6,6 +6,7 @@ import InterfaceManage from '../components/auto/InterfaceManage'
 import CaseManage from '../components/auto/CaseManage'
 import CaseExecute from '../components/auto/CaseExecute'
 import Deposit from '../components/tool/account/Deposit'
+import UserInfo from '../components/tool/account/UserInfo'
 import Auto from '../components/auto/Auto'
 import Tool from '../components/tool/Tool'
 import Account from '../components/tool/account/Account'
@@ -13,6 +14,9 @@ import Report from '../components/auto/Report'
 import Check from '../components/tool/check/Check'
 import UserCheck from '../components/tool/check/UserCheck'
 import Balance from '../components/tool/check/Balance'
+import SmsCode from '../components/tool/SmsCode'
+import Partner from '../components/tool/account/Partner'
+import ThroughPositions from '../components/tool/check/ThroughPositions'
 
 Vue.use(Router)
 
@@ -68,17 +72,27 @@ export default new Router({
       name: '常用工具',
       path: '/test/tool',
       component: Tool,
-      redirect: '/test/tool/account/deposit',
+      redirect: '/test/tool/account/info',
       children: [{
         name: '账户',
         path: '/test/tool/account',
         component: Account,
-        redirect: '/test/tool/account/deposit',
+        redirect: '/test/tool/account/info',
         children: [
+          {
+            path: '/test/tool/account/info',
+            name: '用户信息',
+            component: UserInfo
+          },
           {
             path: '/test/tool/account/deposit',
             name: '充值',
             component: Deposit
+          },
+          {
+            path: '/test/tool/account/partner',
+            name: '合伙人',
+            component: Partner
           }
         ]
       },
@@ -97,8 +111,17 @@ export default new Router({
             path: '/test/tool/check/userCheck',
             name: '单用户',
             component: UserCheck
+          },
+          {
+            path: '/test/tool/check/throughPositions',
+            name: '爆仓计算',
+            component: ThroughPositions
           }
         ]
+      },{
+        name: '短信验证码',
+        path: '/test/tool/smsCode',
+        component: SmsCode
       }]
     }
   ],
