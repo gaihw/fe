@@ -17,6 +17,7 @@ import Balance from '../components/tool/check/Balance'
 import SmsCode from '../components/tool/SmsCode'
 import Partner from '../components/tool/account/Partner'
 import ThroughPositions from '../components/tool/check/ThroughPositions'
+import UpdateMarket from '../components/tool/UpdateMarket'
 
 Vue.use(Router)
 
@@ -118,11 +119,18 @@ export default new Router({
             component: ThroughPositions
           }
         ]
-      },{
+      },
+      {
         name: '短信验证码',
         path: '/test/tool/smsCode',
         component: SmsCode
-      }]
+      },
+      {
+        name: '行情推送',
+        path: '/test/tool/symbol',
+        component: UpdateMarket
+      }
+    ]
     }
   ],
   mode: "history"

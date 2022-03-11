@@ -33,7 +33,7 @@
       <div class="loading-div"
       :style="{height:windowHeight/2 + 'px'}" 
       v-loading="loading" 
-      element-loading-text="加载中..." 
+      element-loading-text="计算中..." 
       v-html="checkData"></div>
     </el-main>
   </el-container>

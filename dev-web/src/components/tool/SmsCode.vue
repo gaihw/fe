@@ -1,4 +1,6 @@
 <template>
+<el-container>
+  <el-main>
   <el-table
     :data="tableData"
     border
@@ -30,6 +32,8 @@
       label="日期">
     </el-table-column>
   </el-table>
+  </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -52,4 +56,10 @@
   }
 </script>
 <style scoped>
+.el-main {
+  position: absolute;
+  left: 220px;
+  right: 20px;
+  overflow-y: scroll;
+}
 </style>

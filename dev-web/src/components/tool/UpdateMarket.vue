@@ -2,26 +2,21 @@
   <el-container>
     <el-header>
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="用户id">
+        <el-form-item label="币种">
+    <el-select v-model="formInline.symbol" placeholder="请选择币种">
+      <el-option label="btcusdt" value="btcusdt"></el-option>
+      <el-option label="ethusdt" value="ethusdt"></el-option>
+    </el-select>
+  </el-form-item>
+        <el-form-item label="价格">
           <el-input
-            v-model="formInline.user"
-            placeholder="请输入用户id"
+            v-model="formInline.price"
+            placeholder="请输入价格"
           ></el-input>
         </el-form-item>
-        <el-form-item label="初始金额">
-          <el-input
-            v-model="formInline.money"
-            placeholder="请输入初始金额"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="模式" prop="marginType">
-          <el-radio-group v-model="formInline.marginType">
-            <el-radio label="0">全仓</el-radio>
-            <el-radio label="1">逐仓</el-radio>
-          </el-radio-group>
-        </el-form-item>
+        
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">计算</el-button>
+          <el-button type="primary" @click="onSubmit">推送</el-button>
         </el-form-item>
       </el-form>
       <el-row>
@@ -29,12 +24,11 @@
       </el-row>
     </el-header>
     <el-main>
-      计算结果:
       <div
         class="loading-div"
         :style="{ height: windowHeight / 2 + 'px' }"
         v-loading="loading"
-        element-loading-text="爆仓计算中..."
+        element-loading-text="推送中..."
         v-html="checkData"
       ></div>
     </el-main>
@@ -46,8 +40,8 @@ export default {
     return {
       formInline: {
         user: "",
-        region: "",
-        money:"",
+        symbol: "",
+        price:"",
         marginType: "0",
       },
       report: "无",
@@ -68,12 +62,10 @@ export default {
         method: "get",
         headers: { "Access-Control-Allow-Origin": "*" },
         url:
-          "http://localhost:10090/api/tool/check/throughPositions?userId=" +
-          this.formInline.user +
-          "&money=" +
-          this.formInline.money +
-          "&marginType=" +
-          this.formInline.marginType,
+          "http://localhost:10090/api/tool/symbol/updateMarket?symbol=" +
+          this.formInline.symbol +
+          "&price=" +
+          this.formInline.price ,
       }).then((result) => {
         console.log(result.data);
         this.checkData = result.data;
