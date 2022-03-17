@@ -8,9 +8,15 @@
             placeholder="请输入用户id"
           ></el-input>
         </el-form-item>
+        <el-form-item label="初始金额" >
+          <el-input disabled
+            v-model="formInline.money"
+            placeholder="请输入初始金额"
+          ></el-input>
+        </el-form-item>
          <el-form-item label="开始时间">
-          <el-date-picker
-            v-model="value"
+          <el-date-picker 
+            v-model="formInline.value"
             type="datetime"
             value-format="yyyy-MM-dd HH:mm:ss"
             placeholder="选择日期时间">
@@ -33,7 +39,7 @@
       <div class="loading-div"
       :style="{height:windowHeight/2 + 'px'}" 
       v-loading="loading" 
-      element-loading-text="计算中..." 
+      element-loading-text="对账中，大约需要1分钟..." 
       v-html="checkData"></div>
     </el-main>
   </el-container>
@@ -45,9 +51,10 @@ export default {
       formInline: {
         user: "",
         region: "",
+        value: '',
+        money:""
       },
       report: "无",
-      value: '',
       checkData: '',
       loading:false,
       windowHeight: document.documentElement.clientHeight, // 实时屏幕高度
@@ -65,7 +72,7 @@ export default {
         headers: { "Access-Control-Allow-Origin": "*" },
         url:
           "http://localhost:10090/api/tool/check/userCheck?userId=" +
-          this.formInline.user+"&time="+this.value,
+          this.formInline.user+"&time="+this.formInline.value+"&money="+this.formInline.money,
       }).then((result) => {
         // console.log(result.data);
         this.checkData = result.data;

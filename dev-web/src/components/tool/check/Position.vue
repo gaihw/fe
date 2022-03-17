@@ -2,22 +2,20 @@
   <el-container>
     <el-header>
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="币种">
-    <el-select v-model="formInline.symbol" placeholder="请选择币种">
-      <el-option label="btcusdt" value="btcusdt"></el-option>
-      <el-option label="ethusdt" value="ethusdt"></el-option>
-      <el-option label="eosusdt" value="eosusdt"></el-option>
-    </el-select>
-  </el-form-item>
-        <el-form-item label="价格">
+        <el-form-item label="用户id">
           <el-input
-            v-model="formInline.price"
-            placeholder="请输入价格"
+            v-model="formInline.user"
+            placeholder="请输入用户id"
           ></el-input>
         </el-form-item>
-        
+        <el-form-item label="模式" prop="marginType">
+          <el-radio-group v-model="formInline.marginType">
+            <el-radio label="0">全仓</el-radio>
+            <el-radio label="1">逐仓</el-radio>
+          </el-radio-group>
+        </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">推送</el-button>
+          <el-button type="primary" @click="onSubmit">计算</el-button>
         </el-form-item>
       </el-form>
       <el-row>
@@ -25,13 +23,15 @@
       </el-row>
     </el-header>
     <el-main>
+      仓位计算:
       <div
         class="loading-div"
         :style="{ height: windowHeight / 2 + 'px' }"
         v-loading="loading"
-        element-loading-text="推送中..."
+        element-loading-text="计算中..."
         v-html="checkData"
-      ></div>
+      >
+      </div>
     </el-main>
   </el-container>
 </template>
@@ -41,37 +41,35 @@ export default {
     return {
       formInline: {
         user: "",
-        symbol: "",
-        price:"",
+        region: "",
         marginType: "0",
       },
-      report: "无",
-      value: "",
-      checkData: "",
       loading: false,
+      checkData: '',
       windowHeight: document.documentElement.clientHeight, // 实时屏幕高度
     };
   },
-  mounted() {
-    this.checkData = "<div>" + this.report + "</div>";
-  },
   methods: {
     onSubmit() {
-      this.checkData = "<div>" + this.report + "</div>";
       this.loading = true;
+      this.checkData = "无";
       this.$http({
         method: "get",
         headers: { "Access-Control-Allow-Origin": "*" },
         url:
-          "http://localhost:10090/api/tool/symbol/updateMarket?symbol=" +
-          this.formInline.symbol +
-          "&price=" +
-          this.formInline.price ,
+          "http://localhost:10090/api/tool/check/positions?userId=" +
+          this.formInline.user+"&marginType="+this.formInline.marginType,
       }).then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         this.checkData = result.data;
         this.loading = false;
       });
+    },
+    tableRowClassName({ row, rowIndex }) {
+      // console.log("row==",row.userId)
+      if (row.userId == null) {
+        return "warning-row";
+      }
     },
   },
 };
@@ -100,5 +98,9 @@ export default {
 .loading-div {
   width: 90%;
   position: absolute;
+}
+.el-divider--vertical {
+  height: 2.5em;
+  width: 0.3em;
 }
 </style>

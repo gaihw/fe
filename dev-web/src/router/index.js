@@ -18,6 +18,7 @@ import SmsCode from '../components/tool/SmsCode'
 import Partner from '../components/tool/account/Partner'
 import ThroughPositions from '../components/tool/check/ThroughPositions'
 import UpdateMarket from '../components/tool/UpdateMarket'
+import Position from '../components/tool/check/Position'
 
 Vue.use(Router)
 
@@ -98,7 +99,7 @@ export default new Router({
         ]
       },
       {
-        name: '对账',
+        name: '对账相关',
         path: '/test/tool/check',
         component: Check,
         redirect: '/test/tool/check/balance',
@@ -110,13 +111,18 @@ export default new Router({
           },
           {
             path: '/test/tool/check/userCheck',
-            name: '单用户',
+            name: '对账',
             component: UserCheck
           },
           {
             path: '/test/tool/check/throughPositions',
             name: '爆仓计算',
             component: ThroughPositions
+          },
+          {
+            path: '/test/tool/check/positions',
+            name: '仓位',
+            component: Position
           }
         ]
       },

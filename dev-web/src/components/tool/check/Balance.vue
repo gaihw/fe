@@ -17,35 +17,31 @@
         </el-form-item>
       </el-form>
       <el-row>
-      <el-col :span="24"><div class="grid-content">1</div></el-col>
-    </el-row>
+        <el-col :span="24"><div class="grid-content">1</div></el-col>
+      </el-row>
     </el-header>
     <el-main>
-       <el-table
-      :data="tableData"
-      style="width: 90%"
-      :row-class-name="tableRowClassName"
-      :header-cell-style="{textAlign: 'center'}"
-      :cell-style="{ textAlign: 'center' }">
-      <el-table-column
-        prop="userId"
-        label="用户ID"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="currencyId"
-        label="币种ID"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="balance"
-        label="余额">
-      </el-table-column>
-      <el-table-column
-        prop="hold"
-        label="冻结">
-      </el-table-column>
-    </el-table>
+      <div
+        class="loading-div"
+        :style="{ height: windowHeight / 2 + 'px' }"
+        v-loading="loading"
+        element-loading-text="同步中..."
+      >
+        <el-table
+          :data="tableData"
+          style="width: 90%"
+          :row-class-name="tableRowClassName"
+          :header-cell-style="{ textAlign: 'center' }"
+          :cell-style="{ textAlign: 'center' }"
+        >
+          <el-table-column prop="userId" label="用户ID" width="180">
+          </el-table-column>
+          <el-table-column prop="currencyId" label="币种ID" width="180">
+          </el-table-column>
+          <el-table-column prop="balance" label="余额"> </el-table-column>
+          <el-table-column prop="hold" label="冻结"> </el-table-column>
+        </el-table>
+      </div>
     </el-main>
   </el-container>
 </template>
@@ -57,11 +53,14 @@ export default {
         user: "",
         region: "",
       },
-      tableData: []
+      tableData: [],
+      loading: false,
+      windowHeight: document.documentElement.clientHeight, // 实时屏幕高度
     };
   },
   methods: {
     onSubmit() {
+      this.loading = true;
       this.$http({
         method: "get",
         headers: { "Access-Control-Allow-Origin": "*" },
@@ -71,25 +70,27 @@ export default {
       }).then((result) => {
         console.log(result.data);
         this.tableData = result.data.data;
+        this.loading = false;
       });
     },
-    allUserSyn(){
+    allUserSyn() {
+      this.loading = true;
       this.$http({
         method: "get",
         headers: { "Access-Control-Allow-Origin": "*" },
-        url:
-          "http://localhost:10090/api/tool/check/getAllUserBalance" ,
+        url: "http://localhost:10090/api/tool/check/getAllUserBalance",
       }).then((result) => {
         console.log(result.data);
         this.tableData = result.data.data;
+        this.loading = false;
       });
     },
-    tableRowClassName({row, rowIndex}) {
+    tableRowClassName({ row, rowIndex }) {
       // console.log("row==",row.userId)
-        if (row.userId == null) {
-          return 'warning-row';
-        }
+      if (row.userId == null) {
+        return "warning-row";
       }
+    },
   },
 };
 </script>
@@ -109,12 +110,12 @@ export default {
   overflow-y: scroll;
 }
 .grid-content {
-    background: #eff1f5;
-    border-radius: 4px;
-    min-height: 5px;
-    color: #eff1f5;
+  background: #eff1f5;
+  border-radius: 4px;
+  min-height: 5px;
+  color: #eff1f5;
 }
-.el-divider--vertical{
+.el-divider--vertical {
   height: 2.5em;
   width: 0.3em;
 }

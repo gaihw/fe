@@ -61,10 +61,11 @@
                 <el-menu-item index="/test/tool/account/partner">合伙人</el-menu-item>
               </el-submenu>
               <el-submenu index="3-2">
-                <template slot="title">对账</template>
+                <template slot="title">对账相关</template>
                 <el-menu-item index="/test/tool/check/balance">余额同步</el-menu-item>
-                <el-menu-item index="/test/tool/check/userCheck">单用户</el-menu-item>
+                <el-menu-item index="/test/tool/check/userCheck">对账</el-menu-item>
                 <el-menu-item index="/test/tool/check/throughPositions">爆仓计算</el-menu-item>
+                <el-menu-item index="/test/tool/check/positions">仓位</el-menu-item>
               </el-submenu>
               <el-menu-item index="/test/tool/smsCode">短信验证码</el-menu-item>
               <el-menu-item index="/test/tool/symbol">行情推送</el-menu-item>
