@@ -6,6 +6,7 @@
     <el-select v-model="formInline.symbol" placeholder="请选择币种">
       <el-option label="btcusdt" value="btcusdt"></el-option>
       <el-option label="ethusdt" value="ethusdt"></el-option>
+      <el-option label="ltcusdt" value="ltcusdt"></el-option>
       <el-option label="eosusdt" value="eosusdt"></el-option>
     </el-select>
   </el-form-item>

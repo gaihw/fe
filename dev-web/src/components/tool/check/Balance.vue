@@ -34,7 +34,7 @@
           :header-cell-style="{ textAlign: 'center' }"
           :cell-style="{ textAlign: 'center' }"
         >
-          <el-table-column prop="userId" label="用户ID" width="180">
+          <el-table-column prop="userId" label="账户" width="180">
           </el-table-column>
           <el-table-column prop="currencyId" label="币种ID" width="180">
           </el-table-column>
@@ -103,7 +103,7 @@ export default {
 
 .el-main {
   position: absolute;
-  left: 220px;
+  left: 300px;
   right: 0;
   top: 240px;
   bottom: 20px;
@@ -114,6 +114,10 @@ export default {
   border-radius: 4px;
   min-height: 5px;
   color: #eff1f5;
+}
+.loading-div {
+  width: 90%;
+  position: absolute;
 }
 .el-divider--vertical {
   height: 2.5em;
