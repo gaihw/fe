@@ -57,7 +57,7 @@
               <el-submenu index="3-1">
                 <template slot="title">账户</template>
                 <el-menu-item index="/test/tool/account/info">用户信息</el-menu-item>
-                <el-menu-item index="/test/tool/account/deposit" disabled>充值</el-menu-item>
+                <el-menu-item index="/test/tool/account/deposit" >充值</el-menu-item>
                 <el-menu-item index="/test/tool/account/partner">合伙人</el-menu-item>
               </el-submenu>
               <el-submenu index="3-2">
