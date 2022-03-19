@@ -76,7 +76,7 @@
           <el-main>
             <el-row>
               <el-col :span="24" 
-                ><div class="grid-content bg-purple-dark">
+                ><div class="cl-breadcrumb bg-purple-dark">
                   <el-breadcrumb separator-class="el-icon-arrow-right">
                   <el-breadcrumb-item
                     v-for="(item, index) in levelList"
@@ -180,7 +180,7 @@ export default {
 }
 
 .el-main {
-  // background-color: #e9eef3;
+  // background-color: #277cd1;
   color: #333;
   text-align: left;
 }
@@ -208,6 +208,10 @@ body > .el-container {
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
+  // position: absolute;
+}
+.cl-breadcrumb{
+  min-height: 25px;
 }
 .row-bg {
   padding: 10px 0;
